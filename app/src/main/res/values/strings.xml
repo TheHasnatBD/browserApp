@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Browser</string>
+    <string name="enterUrl">Type URL</string>
+    <string name="enterButton">Go</string>
+    <string name="dev_Name">Abdullah Al-Hasnat</string>
+
+    <string name="app">\nThis app is build for Learning purpose. You can use this app for your any need.\n
+        Git Repository Link-\nhttps://gitlab.com/TheHasnatBD/browserApp
+
+        \n\nUniversity Project\nBANGLADESH UNIVERSITY\n\nCourse Name:\n<b>Software Engineering</b>
+    </string>
+
+    <string name="Course_Instructor">Course Instructor:\n<b>Sadia Afrin Shampa\n</b></string>
+    <string name="app_feature">\t☐ This is a simple Web Browser.
+        User can input their URL in input area. He can browse smoothly using this browser with smart progressbar in url loading.\n
+        \t☐ Here has a Home button and 2 buttons for previous &amp; forward browsing web page (if available those types of web page)\n
+        \t☐ It has a feature that on back button pressing. This Browser detects if has any previous web pages, if there has no pages
+        it warn\'s user to exit this app. By double clicking back pressing within 1.5 second app will be exit.\n
+        \t☐ This app has also Splash Screen/ Welcome Screen For better user Interface.\n
+        \t☐ It has more interactive Intro Screen with SharedPreference, helpful for new developers.\n
+        \t☐ It has an attractive feature that is cookies handling. It saves cookies for interactive browsing.\n
+        \t☐ This app is connected with Firebase Analytics, for real time user, user activity, user location, apps bug reports etc \n
+    </string>
+
+    <string name="last_talk">(More features will be added in upcoming version. Stay connected with this git repository for next update.)
+    \n</string>
+
+
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="start">Start</string>
+    <string name="title_slide1">Easy Browsing</string>
+    <string name="desc_slide1">Easy browsing functionality are applied for general users</string>
+    <string name="title_slide2">Fast Browsing</string>
+    <string name="desc_slide2">Superb fast browsing speed you get by using browser</string>
+    <string name="title_slide3">Notification</string>
+    <string name="desc_slide3">All update will\'be get through the browser</string>
+
+
+</resources>

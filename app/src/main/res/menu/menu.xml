@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_action_home"
+        android:title="Back"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/back"
+        android:icon="@drawable/ic_action_back"
+        android:title="Back"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/forward"
+        android:icon="@drawable/ic_action_forward"
+        android:title="Forward"
+        app:showAsAction="always">
+    </item>
+
+
+    <item
+        android:title="Browser Option"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_more">
+        <menu>
+            <item
+                android:orderInCategory="100"
+                android:id="@+id/settings"
+                android:title="Settings"
+                android:icon="@drawable/ic_action_settings"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:orderInCategory="100"
+                android:id="@+id/about_dev"
+                android:title="About"
+                android:icon="@drawable/ic_action_about"
+                app:showAsAction="never">
+            </item>
+            <item
+                android:orderInCategory="100"
+                android:id="@+id/exit"
+                android:icon="@drawable/ic_action_exit"
+                android:title="Exit"
+                app:showAsAction="never">
+            </item>
+        </menu>
+    </item>
+
+</menu>
