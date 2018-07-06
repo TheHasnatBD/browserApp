@@ -11,4 +11,4 @@
 
 
 
-[ Android Web Browser App For University Assignment Project. It was my 3rd year project sample. (Software Engineering Project With Software Module) ]
+[ Android Web Browser App For University Project Assignment. It was my 3rd year project sample. (Software Engineering Project With Software Module) ]
