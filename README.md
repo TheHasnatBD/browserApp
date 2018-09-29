@@ -6,9 +6,3 @@
 * Check Internet connection with a custom alert dialog
 * Using Cache & Cookies
 * Exit on pressing Back button
-
-
-
-
-
-[ Android Web Browser App For University Project Assignment. It was my 3rd year project sample. (Software Engineering Project With Software Module) ]
