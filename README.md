@@ -12,11 +12,11 @@ A modern, cross-platform web browser built using **Kotlin Multiplatform (KMP)** 
 - **Web Engine**: Powered by [Compose WebView Multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform) for high-performance web rendering across all platforms.
 - **Theme Support**: Light, Dark, and System theme synchronization.
 
-## Upcoming Features (Under Development)
+## 📌 Upcoming Features (Under Development)
 
-- 📌 **Bookmarks & History**: Implementation using **Room DB** for persistent browsing data.
-- 🌍 **Multi-localization Support**: Adding support for multiple languages.
-- 🛠️ **Enhanced Settings**: More granular control over browser behavior.
+-  **Bookmarks & History**: Implementation using **Room DB** for persistent browsing data.
+-  **Multi-localization Support**: Adding support for multiple languages.
+- ️ **Enhanced Settings**: More granular control over browser behavior.
 
 ## 📸 Screenshots
 
@@ -43,7 +43,7 @@ A modern, cross-platform web browser built using **Kotlin Multiplatform (KMP)** 
 - [DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) - Multiplatform Preferences
 - [Compose WebView Multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform)
 
-## 🏗️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - **Android Studio Ladybug** or later.
