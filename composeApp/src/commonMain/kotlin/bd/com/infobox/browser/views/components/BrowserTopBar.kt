@@ -27,7 +27,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import bd.com.infobox.browser.Res
+import bd.com.infobox.browser.back
+import bd.com.infobox.browser.browser_menu
+import bd.com.infobox.browser.clear
+import bd.com.infobox.browser.close_tab
+import bd.com.infobox.browser.forward
+import bd.com.infobox.browser.home
 import bd.com.infobox.browser.models.BrowserTab
+import bd.com.infobox.browser.new_tab
+import bd.com.infobox.browser.refresh
+import bd.com.infobox.browser.search_hint
+import bd.com.infobox.browser.tabs
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BrowserTopBar(
@@ -99,7 +111,7 @@ fun BrowserTopBar(
                                         onClick = { onTabClose(tab.id) },
                                         modifier = Modifier.size(14.dp)
                                     ) {
-                                        Icon(Icons.Default.Close, null, modifier = Modifier.size(10.dp))
+                                        Icon(Icons.Default.Close, stringResource(Res.string.close_tab), modifier = Modifier.size(10.dp))
                                     }
                                 }
                             }
@@ -107,7 +119,7 @@ fun BrowserTopBar(
                     }
                     item {
                         IconButton(onClick = onNewTab, modifier = Modifier.size(32.dp)) {
-                            Icon(Icons.Default.Add, null, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.Add, stringResource(Res.string.new_tab), modifier = Modifier.size(18.dp))
                         }
                     }
                 }
@@ -121,13 +133,13 @@ fun BrowserTopBar(
             ) {
                 if (isWide) {
                     IconButton(onClick = onBack, enabled = canGoBack, modifier = Modifier.size(36.dp)) { 
-                        Icon(Icons.Default.ArrowBack, "Back", modifier = Modifier.size(18.dp)) 
+                        Icon(Icons.Default.ArrowBack, stringResource(Res.string.back), modifier = Modifier.size(18.dp)) 
                     }
                     IconButton(onClick = onForward, enabled = canGoForward, modifier = Modifier.size(36.dp)) { 
-                        Icon(Icons.Default.ArrowForward, "Forward", modifier = Modifier.size(18.dp)) 
+                        Icon(Icons.Default.ArrowForward, stringResource(Res.string.forward), modifier = Modifier.size(18.dp)) 
                     }
                     IconButton(onClick = onRefresh, modifier = Modifier.size(36.dp)) { 
-                        Icon(Icons.Default.Refresh, "Refresh", modifier = Modifier.size(18.dp)) 
+                        Icon(Icons.Default.Refresh, stringResource(Res.string.refresh), modifier = Modifier.size(18.dp)) 
                     }
                     Spacer(Modifier.width(4.dp))
                 }
@@ -184,7 +196,7 @@ fun BrowserTopBar(
                             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
                                 if (urlText.isEmpty() && !isFocused) {
                                     Text(
-                                        "Search or type URL",
+                                        stringResource(Res.string.search_hint),
                                         fontSize = 13.sp,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                                     )
@@ -199,7 +211,7 @@ fun BrowserTopBar(
                                 ) {
                                     Icon(
                                         Icons.Default.Clear,
-                                        contentDescription = "Clear",
+                                        contentDescription = stringResource(Res.string.clear),
                                         modifier = Modifier.size(14.dp),
                                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -214,7 +226,7 @@ fun BrowserTopBar(
                 if (!isWide) {
                     IconButton(onClick = onTabClick, modifier = Modifier.size(36.dp)) {
                         Box(contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.CropSquare, contentDescription = "Tabs", modifier = Modifier.size(22.dp))
+                            Icon(Icons.Default.CropSquare, contentDescription = stringResource(Res.string.tabs), modifier = Modifier.size(22.dp))
                             Text(tabs.size.toString(), fontSize = 8.sp, fontWeight = FontWeight.Bold)
                         }
                     }
@@ -222,7 +234,7 @@ fun BrowserTopBar(
                 
                 Box {
                     IconButton(onClick = { onMenuToggle(true) }, modifier = Modifier.size(36.dp)) {
-                        Icon(Icons.Default.MoreVert, contentDescription = "Menu", modifier = Modifier.size(22.dp))
+                        Icon(Icons.Default.MoreVert, contentDescription = stringResource(Res.string.browser_menu), modifier = Modifier.size(22.dp))
                     }
                     DropdownMenu(
                         expanded = showMenu,
@@ -230,7 +242,7 @@ fun BrowserTopBar(
                         modifier = Modifier.zIndex(1000f)
                     ) {
                         DropdownMenuItem(
-                            text = { Text("New Tab") },
+                            text = { Text(stringResource(Res.string.new_tab)) },
                             onClick = {
                                 onNewTab()
                                 onMenuToggle(false)
@@ -238,7 +250,7 @@ fun BrowserTopBar(
                             leadingIcon = { Icon(Icons.Default.Add, null) }
                         )
                         DropdownMenuItem(
-                            text = { Text("Refresh") },
+                            text = { Text(stringResource(Res.string.refresh)) },
                             onClick = {
                                 onRefresh()
                                 onMenuToggle(false)
@@ -247,7 +259,7 @@ fun BrowserTopBar(
                         )
                         if (isWide) {
                             DropdownMenuItem(
-                                text = { Text("Home") },
+                                text = { Text(stringResource(Res.string.home)) },
                                 onClick = {
                                     onUrlSubmit("https://www.google.com")
                                     onMenuToggle(false)

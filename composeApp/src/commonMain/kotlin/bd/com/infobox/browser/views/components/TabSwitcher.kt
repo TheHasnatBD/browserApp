@@ -17,7 +17,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import bd.com.infobox.browser.Res
+import bd.com.infobox.browser.close
+import bd.com.infobox.browser.close_tab
 import bd.com.infobox.browser.models.BrowserTab
+import bd.com.infobox.browser.new_tab
+import bd.com.infobox.browser.tabs
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,15 +41,15 @@ fun TabSwitcher(
     ) {
         Column {
             TopAppBar(
-                title = { Text("Tabs") },
+                title = { Text(stringResource(Res.string.tabs)) },
                 navigationIcon = {
                     IconButton(onClick = onClose) { 
-                        Icon(Icons.Default.Close, "Close") 
+                        Icon(Icons.Default.Close, stringResource(Res.string.close)) 
                     }
                 },
                 actions = {
                     IconButton(onClick = onNewTab) { 
-                        Icon(Icons.Default.Add, "New Tab") 
+                        Icon(Icons.Default.Add, stringResource(Res.string.new_tab)) 
                     }
                 }
             )
@@ -78,7 +84,7 @@ fun TabSwitcher(
                                             onClick = { onTabClose(tab.id) },
                                             modifier = Modifier.size(24.dp)
                                         ) {
-                                            Icon(Icons.Default.Close, "Close Tab", modifier = Modifier.size(16.dp))
+                                            Icon(Icons.Default.Close, stringResource(Res.string.close_tab), modifier = Modifier.size(16.dp))
                                         }
                                     }
                                 }

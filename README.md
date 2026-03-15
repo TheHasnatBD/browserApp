@@ -5,6 +5,7 @@ A modern, cross-platform web browser built using **Kotlin Multiplatform (KMP)** 
 ## 🚀 Features
 
 - **Multi-platform Support**: Runs on Android, iOS, and Desktop (Windows/macOS/Linux).
+- **Multi-localization & RTL Support**: Support for multiple languages (English, Bengali, Hindi, Arabic, French) with automatic **Right-to-Left (RTL)** layout adjustment.
 - **Tab Management**: Efficiently handle multiple browsing tabs with persistent state.
 - **Persistent Storage**: Uses **androidx.datastore** for cross-platform settings and theme preferences.
 - **Dependency Injection**: Powered by **Koin** for clean and scalable architecture.
@@ -15,24 +16,24 @@ A modern, cross-platform web browser built using **Kotlin Multiplatform (KMP)** 
 ## 📌 Upcoming Features (Under Development)
 
 -  **Bookmarks & History**: Implementation using **Room DB** for persistent browsing data.
--  **Multi-localization Support**: Adding support for multiple languages.
-- ️ **Enhanced Settings**: More granular control over browser behavior.
+- ️**Enhanced Settings**: More granular control over browser behavior.
 
-## 📸 Screenshots
+## Screenshots
 
 ### Android
 <p align="center">
-  <img src="files/android/home-light.png" width="200" alt="Android Home Light" />
   <img src="files/android/home-dark.png" width="200" alt="Android Home Dark" />
   <img src="files/android/tabs.png" width="200" alt="Android Tabs" />
-  <img src="files/android/settings.png" width="200" alt="Android Settings" />
+  <img src="files/android/settings.png" width="200" alt="Android Menu" />
+  <img src="files/android/settings-language.png" width="200" alt="Settings Page" />
 </p>
 
 ### Desktop (JVM)
 <p align="center">
-  <img src="files/jvm/home-light.png" width="400" alt="Desktop Home" />
+  <img src="files/jvm/home-light.png" width="600" alt="Desktop Home" />
   <br>
-  <img src="files/jvm/settings.png" width="400" alt="Desktop Settings" />
+  <br>
+  <img src="files/jvm/settings.png" width="600" alt="Desktop Settings" />
 </p>
 
 ## 🛠️ Built With

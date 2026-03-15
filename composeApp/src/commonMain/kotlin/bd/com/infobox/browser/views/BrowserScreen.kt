@@ -3,7 +3,9 @@ package bd.com.infobox.browser.views
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -13,7 +15,9 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import bd.com.infobox.browser.*
 import bd.com.infobox.browser.models.BrowserTab
+import bd.com.infobox.browser.repository.AppLanguage
 import bd.com.infobox.browser.repository.AppTheme
 import bd.com.infobox.browser.repository.ThemeSettings
 import bd.com.infobox.browser.views.components.BrowserBottomBar
@@ -21,6 +25,7 @@ import bd.com.infobox.browser.views.components.BrowserTopBar
 import bd.com.infobox.browser.views.components.TabSwitcher
 import com.multiplatform.webview.web.*
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -119,15 +124,15 @@ fun BrowserScreen(
         drawerContent = {
             ModalDrawerSheet {
                 Spacer(Modifier.height(12.dp))
-                Text("Browser Menu", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(Res.string.browser_menu), modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleMedium)
                 NavigationDrawerItem(
-                    label = { Text("New Tab") },
+                    label = { Text(stringResource(Res.string.new_tab)) },
                     selected = false,
                     onClick = { addNewTab() },
                     icon = { Icon(Icons.Default.Add, null) }
                 )
                 NavigationDrawerItem(
-                    label = { Text("Refresh") },
+                    label = { Text(stringResource(Res.string.refresh)) },
                     selected = false,
                     onClick = {
                         currentNavigator.reload()
@@ -136,7 +141,7 @@ fun BrowserScreen(
                     icon = { Icon(Icons.Default.Refresh, null) }
                 )
                 NavigationDrawerItem(
-                    label = { Text("Bookmarks") },
+                    label = { Text(stringResource(Res.string.bookmarks)) },
                     selected = false,
                     onClick = {
                         showBookmarks = true
@@ -145,7 +150,7 @@ fun BrowserScreen(
                     icon = { Icon(Icons.Default.BookmarkBorder, null) }
                 )
                 NavigationDrawerItem(
-                    label = { Text("History") },
+                    label = { Text(stringResource(Res.string.history)) },
                     selected = false,
                     onClick = {
                         showHistory = true
@@ -154,7 +159,7 @@ fun BrowserScreen(
                     icon = { Icon(Icons.Default.History, null) }
                 )
                 NavigationDrawerItem(
-                    label = { Text("Settings") },
+                    label = { Text(stringResource(Res.string.settings)) },
                     selected = false,
                     onClick = {
                         showSettings = true
@@ -297,23 +302,23 @@ fun BrowserScreen(
 
                     if (showBookmarks) {
                         Box(modifier = Modifier.fillMaxSize().zIndex(200f)) {
-                            OverlayScreen(title = "Bookmarks", onClose = { showBookmarks = false }) {
-                                Text("No bookmarks yet", modifier = Modifier.padding(16.dp))
+                            OverlayScreen(title = stringResource(Res.string.bookmarks), onClose = { showBookmarks = false }) {
+                                Text(stringResource(Res.string.no_bookmarks), modifier = Modifier.padding(16.dp))
                             }
                         }
                     }
 
                     if (showHistory) {
                         Box(modifier = Modifier.fillMaxSize().zIndex(200f)) {
-                            OverlayScreen(title = "History", onClose = { showHistory = false }) {
-                                Text("No history yet", modifier = Modifier.padding(16.dp))
+                            OverlayScreen(title = stringResource(Res.string.history), onClose = { showHistory = false }) {
+                                Text(stringResource(Res.string.no_history), modifier = Modifier.padding(16.dp))
                             }
                         }
                     }
 
                     if (showSettings) {
                         Box(modifier = Modifier.fillMaxSize().zIndex(200f)) {
-                            OverlayScreen(title = "Settings", onClose = { showSettings = false }) {
+                            OverlayScreen(title = stringResource(Res.string.settings), onClose = { showSettings = false }) {
                                 SettingsScreen(themeSettings)
                             }
                         }
@@ -327,13 +332,25 @@ fun BrowserScreen(
 @Composable
 fun SettingsScreen(themeSettings: ThemeSettings) {
     val selectedTheme by themeSettings.selectedTheme.collectAsState(AppTheme.SYSTEM)
+    val selectedLanguage by themeSettings.selectedLanguage.collectAsState(AppLanguage.ENGLISH)
     val scope = rememberCoroutineScope()
 
-    Column(modifier = Modifier.padding(16.dp)) {
-        Text("Theme", style = MaterialTheme.typography.titleMedium)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        // Theme Selection Section
+        Text(stringResource(Res.string.theme), style = MaterialTheme.typography.titleMedium)
         Spacer(Modifier.height(8.dp))
         
         AppTheme.entries.forEach { theme ->
+            val themeName = when(theme) {
+                AppTheme.LIGHT -> stringResource(Res.string.light)
+                AppTheme.DARK -> stringResource(Res.string.dark)
+                AppTheme.SYSTEM -> stringResource(Res.string.system)
+            }
             Row(
                 verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
                 modifier = Modifier
@@ -354,7 +371,42 @@ fun SettingsScreen(themeSettings: ThemeSettings) {
                     onClick = { scope.launch { themeSettings.setTheme(theme) } }
                 )
                 Spacer(Modifier.width(8.dp))
-                Text(theme.name.lowercase().replaceFirstChar { it.uppercase() })
+                Text(themeName)
+            }
+            Spacer(Modifier.height(4.dp))
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        // Language Selection Section
+        Text(stringResource(Res.string.language), style = MaterialTheme.typography.titleMedium)
+        Spacer(Modifier.height(8.dp))
+
+        AppLanguage.entries.forEach { language ->
+            Row(
+                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .background(
+                        if (selectedLanguage == language) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                        else Color.Transparent,
+                        RoundedCornerShape(8.dp)
+                    )
+                    .clickable {
+                        scope.launch { themeSettings.setLanguage(language) }
+                    }
+                    .padding(horizontal = 12.dp)
+            ) {
+                RadioButton(
+                    selected = selectedLanguage == language,
+                    onClick = { scope.launch { themeSettings.setLanguage(language) } }
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = "${language.flag} ${language.displayName}",
+                    style = MaterialTheme.typography.bodyLarge
+                )
             }
             Spacer(Modifier.height(4.dp))
         }

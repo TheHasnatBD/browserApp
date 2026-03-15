@@ -10,6 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import bd.com.infobox.browser.Res
+import bd.com.infobox.browser.back
+import bd.com.infobox.browser.bookmarks
+import bd.com.infobox.browser.forward
+import bd.com.infobox.browser.history
+import bd.com.infobox.browser.home
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BrowserBottomBar(
@@ -34,19 +41,19 @@ fun BrowserBottomBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onBack, enabled = canGoBack) { 
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") 
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
             }
             IconButton(onClick = onForward, enabled = canGoForward) { 
-                Icon(Icons.AutoMirrored.Filled.ArrowForward, "Forward") 
+                Icon(Icons.AutoMirrored.Filled.ArrowForward, stringResource(Res.string.forward)) 
             }
             IconButton(onClick = onHome) { 
-                Icon(Icons.Default.Home, "Home") 
+                Icon(Icons.Default.Home, stringResource(Res.string.home)) 
             }
             IconButton(onClick = onBookmarks) { 
-                Icon(Icons.Default.BookmarkBorder, "Bookmarks") 
+                Icon(Icons.Default.BookmarkBorder, stringResource(Res.string.bookmarks)) 
             }
             IconButton(onClick = onHistory) { 
-                Icon(Icons.Default.History, "History") 
+                Icon(Icons.Default.History, stringResource(Res.string.history))
             }
         }
     }

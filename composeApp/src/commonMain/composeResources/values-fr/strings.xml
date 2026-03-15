@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BrowserApp</string>
+    <string name="search_hint">Rechercher ou saisir une URL</string>
+    <string name="new_tab">Nouvel onglet</string>
+    <string name="refresh">Actualiser</string>
+    <string name="home">Accueil</string>
+    <string name="back">Retour</string>
+    <string name="forward">Suivant</string>
+    <string name="bookmarks">Favoris</string>
+    <string name="history">Historique</string>
+    <string name="settings">Paramètres</string>
+    <string name="browser_menu">Menu du navigateur</string>
+    <string name="no_bookmarks">Aucun favori pour le moment</string>
+    <string name="no_history">Aucun historique pour le moment</string>
+    <string name="theme">Thème</string>
+    <string name="light">Clair</string>
+    <string name="dark">Sombre</string>
+    <string name="system">Système</string>
+    <string name="clear">Effacer</string>
+    <string name="tabs">Onglets</string>
+</resources>

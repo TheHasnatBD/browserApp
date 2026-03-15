@@ -9,7 +9,7 @@ import org.koin.dsl.module
 expect val platformModule: Module
 
 val appModule = module {
-    single { ThemeSettings(get()) }
+    single { ThemeSettings(get(), get()) }
 }
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) =

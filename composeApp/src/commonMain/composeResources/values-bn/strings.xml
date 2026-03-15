@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ব্রাউজার অ্যাপ</string>
+    <string name="search_hint">খুঁজুন বা ইউআরএল টাইপ করুন</string>
+    <string name="new_tab">নতুন ট্যাব</string>
+    <string name="refresh">রিফ্রেশ</string>
+    <string name="home">হোম</string>
+    <string name="back">পিছনে</string>
+    <string name="forward">সামনে</string>
+    <string name="bookmarks">বুকমার্ক</string>
+    <string name="history">ইতিহাস</string>
+    <string name="settings">সেটিংস</string>
+    <string name="browser_menu">ব্রাউজার মেনু</string>
+    <string name="no_bookmarks">কোনো বুকমার্ক নেই</string>
+    <string name="no_history">কোনো ইতিহাস নেই</string>
+    <string name="theme">থিম</string>
+    <string name="light">লাইট</string>
+    <string name="dark">ডার্ক</string>
+    <string name="system">সিস্টেম</string>
+    <string name="clear">মুছুন</string>
+    <string name="tabs">ট্যাব</string>
+</resources>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">تطبيق المتصفح</string>
+    <string name="search_hint">ابحث أو اكتب عنوان URL</string>
+    <string name="new_tab">علامة تبويب جديدة</string>
+    <string name="refresh">تحديث</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="back">رجوع</string>
+    <string name="forward">للأمام</string>
+    <string name="bookmarks">الإشارات المرجعية</string>
+    <string name="history">السجل</string>
+    <string name="settings">الإعدادات</string>
+    <string name="browser_menu">قائمة المتصفح</string>
+    <string name="no_bookmarks">لا توجد إشارات مرجعية بعد</string>
+    <string name="no_history">لا يوجد سجل بعد</string>
+    <string name="theme">المظهر</string>
+    <string name="light">فاتح</string>
+    <string name="dark">داكن</string>
+    <string name="system">تلقائي</string>
+    <string name="clear">مسح</string>
+    <string name="tabs">علامات التبويب</string>
+</resources>

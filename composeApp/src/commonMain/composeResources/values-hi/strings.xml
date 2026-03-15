@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">BrowserApp</string>
+    <string name="search_hint">खोजें या URL टाइप करें</string>
+    <string name="new_tab">नया टैब</string>
+    <string name="refresh">रीफ़्रेश करें</string>
+    <string name="home">होम</string>
+    <string name="back">पीछे</string>
+    <string name="forward">आगे</string>
+    <string name="bookmarks">बुकमार्क</string>
+    <string name="history">इतिहास</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="browser_menu">ब्राउज़र मेनू</string>
+    <string name="no_bookmarks">अभी तक कोई बुकमार्क नहीं है</string>
+    <string name="no_history">अभी तक कोई इतिहास नहीं है</string>
+    <string name="theme">थीम</string>
+    <string name="light">लाइट</string>
+    <string name="dark">डार्क</string>
+    <string name="system">सिस्टम</string>
+    <string name="clear">साफ़ करें</string>
+    <string name="tabs">टैब</string>
+    <string name="close">बंद करें</string>
+    <string name="close_tab">टैब बंद करें</string>
+</resources>

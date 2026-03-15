@@ -51,6 +51,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.appcompat)
 
             implementation(libs.koin.android)
             implementation(libs.koin.compose)
@@ -102,6 +103,10 @@ kotlin {
             //implementation(libs.kcef)
         }
     }
+}
+
+compose.resources {
+    packageOfResClass = "bd.com.infobox.browser"
 }
 
 android {
