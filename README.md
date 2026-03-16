@@ -6,17 +6,13 @@ A modern, cross-platform web browser built using **Kotlin Multiplatform (KMP)** 
 
 - **Multi-platform Support**: Runs on Android, iOS, and Desktop (Windows/macOS/Linux).
 - **Multi-localization & RTL Support**: Support for multiple languages (English, Bengali, Hindi, Arabic, French) with automatic **Right-to-Left (RTL)** layout adjustment.
-- **Tab Management**: Efficiently handle multiple browsing tabs with persistent state.
+- **Tab Management**: Efficiently handle multiple browsing tabs with persistent state powered by **Room DB**.
+- **Bookmarks & History**: Persistent storage for your favorite sites and browsing history using **Room DB**.
 - **Persistent Storage**: Uses **androidx.datastore** for cross-platform settings and theme preferences.
 - **Dependency Injection**: Powered by **Koin** for clean and scalable architecture.
 - **Material 3 UI**: Modern and responsive design using Compose Multiplatform.
 - **Web Engine**: Powered by [Compose WebView Multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform) for high-performance web rendering across all platforms.
 - **Theme Support**: Light, Dark, and System theme synchronization.
-
-## 📌 Upcoming Features (Under Development)
-
--  **Bookmarks & History**: Implementation using **Room DB** for persistent browsing data.
-- ️**Enhanced Settings**: More granular control over browser behavior.
 
 ## Screenshots
 
@@ -41,6 +37,7 @@ A modern, cross-platform web browser built using **Kotlin Multiplatform (KMP)** 
 - [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html)
 - [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)
 - [Koin](https://insert-koin.io/) - Dependency Injection
+- [Room](https://developer.android.com/jetpack/androidx/releases/room) - Multiplatform Persistent Database
 - [DataStore](https://developer.android.com/jetpack/androidx/releases/datastore) - Multiplatform Preferences
 - [Compose WebView Multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform)
 

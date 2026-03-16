@@ -1,28 +1,42 @@
 package bd.com.infobox.browser.repository
 
 import bd.com.infobox.browser.data.local.dao.BookmarkDao
+import bd.com.infobox.browser.data.local.dao.BrowserTabDao
 import bd.com.infobox.browser.data.local.dao.HistoryDao
 import bd.com.infobox.browser.models.Bookmark
+import bd.com.infobox.browser.models.BrowserTab
 import bd.com.infobox.browser.models.HistoryEntry
-import bd.com.infobox.browser.utils.formatMillisWithTimeNow
 import kotlinx.coroutines.flow.Flow
 import kotlin.time.Clock
 
 class BrowserRepository(
     private val historyDao: HistoryDao,
-    private val bookmarkDao: BookmarkDao
+    private val bookmarkDao: BookmarkDao,
+    private val tabDao: BrowserTabDao
 ) {
+    // Tabs
+    fun getAllTabs(): Flow<List<BrowserTab>> = tabDao.getAllTabs()
+
+    suspend fun saveTab(tab: BrowserTab) {
+        tabDao.insert(tab.copy(lastAccessed = Clock.System.now().toEpochMilliseconds()))
+    }
+
+    suspend fun deleteTab(id: String) = tabDao.deleteById(id)
+
+    suspend fun clearAllTabs() = tabDao.deleteAll()
+
     // History
     fun getAllHistory(): Flow<List<HistoryEntry>> = historyDao.getAllHistory()
 
     suspend fun addHistoryEntry(title: String, url: String) {
         if (url.isBlank() || url == "about:blank") return
         
+        val now = Clock.System.now().toEpochMilliseconds()
         val entry = HistoryEntry(
-            id = url.hashCode().toString() + kotlin.time.Clock.System.now().toEpochMilliseconds().toString(),
-            title = if (title.isBlank()) url else title,
+            id = url.hashCode().toString() + now.toString(),
+            title = title.ifBlank { url },
             url = url,
-            timestamp = kotlin.time.Clock.System.now().toEpochMilliseconds()
+            timestamp = now
         )
         historyDao.insert(entry)
     }
@@ -35,11 +49,12 @@ class BrowserRepository(
     fun getAllBookmarks(): Flow<List<Bookmark>> = bookmarkDao.getAllBookmarks()
 
     suspend fun addBookmark(title: String, url: String) {
+        val now = Clock.System.now().toEpochMilliseconds()
         val bookmark = Bookmark(
             id = url.hashCode().toString(),
-            title = if (title.isBlank()) url else title,
+            title = title.ifBlank { url },
             url = url,
-            timestamp = Clock.System.now().toEpochMilliseconds()
+            timestamp = now
         )
         bookmarkDao.insert(bookmark)
     }

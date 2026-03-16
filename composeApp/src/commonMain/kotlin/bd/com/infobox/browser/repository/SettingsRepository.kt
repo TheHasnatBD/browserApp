@@ -26,6 +26,7 @@ class SettingsRepository(
 ) {
     private val themeKey = stringPreferencesKey("app_theme")
     private val languageKey = stringPreferencesKey("app_language")
+    private val activeTabIdKey = stringPreferencesKey("active_tab_id")
 
     val selectedTheme: Flow<AppTheme> = dataStore.data.map { preferences ->
         val themeName = preferences[themeKey] ?: AppTheme.SYSTEM.name
@@ -41,6 +42,10 @@ class SettingsRepository(
         AppLanguage.entries.find { it.code == langCode } ?: AppLanguage.ENGLISH
     }
 
+    val activeTabId: Flow<String?> = dataStore.data.map { preferences ->
+        preferences[activeTabIdKey]
+    }
+
     suspend fun setTheme(theme: AppTheme) {
         dataStore.edit { preferences ->
             preferences[themeKey] = theme.name
@@ -52,5 +57,11 @@ class SettingsRepository(
             preferences[languageKey] = language.code
         }
         localizationManager.applyLanguage(language.code)
+    }
+
+    suspend fun setActiveTabId(id: String) {
+        dataStore.edit { preferences ->
+            preferences[activeTabIdKey] = id
+        }
     }
 }

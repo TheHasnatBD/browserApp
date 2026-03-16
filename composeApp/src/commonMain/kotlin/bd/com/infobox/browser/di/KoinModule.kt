@@ -12,11 +12,12 @@ expect val platformModule: Module
 
 val appModule = module {
     single { SettingsRepository(get(), get()) }
-    single { BrowserRepository(get(), get()) }
+    single { BrowserRepository(get(), get(), get()) }
     
     // DAOs
     single { get<AppDatabase>().historyDao() }
     single { get<AppDatabase>().bookmarkDao() }
+    single { get<AppDatabase>().browserTabDao() }
 }
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) =

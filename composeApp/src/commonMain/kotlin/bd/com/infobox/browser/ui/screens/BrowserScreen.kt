@@ -26,11 +26,8 @@ import bd.com.infobox.browser.ui.components.TabSwitcher
 import bd.com.infobox.browser.utils.formatMillisWithTime
 import com.multiplatform.webview.web.*
 import kotlinx.coroutines.launch
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import kotlin.time.Instant
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,10 +38,41 @@ fun BrowserScreen(
     val scope = rememberCoroutineScope()
     
     // Main state for the list of tabs
-    var tabs by remember { mutableStateOf(listOf(
-        BrowserTab(id = "1", url = "https://www.google.com")
-    )) }
-    var activeTabId by remember { mutableStateOf("1") }
+    var tabs by remember { mutableStateOf<List<BrowserTab>>(emptyList()) }
+    var activeTabId by remember { mutableStateOf("") }
+    var isInitialized by remember { mutableStateOf(false) }
+
+    // Load tabs and active tab from DB/Settings on launch
+    LaunchedEffect(Unit) {
+        browserRepository.getAllTabs().collect { savedTabs ->
+            if (!isInitialized) {
+                if (savedTabs.isEmpty()) {
+                    val initialTab = BrowserTab(id = "1", url = "https://www.google.com")
+                    tabs = listOf(initialTab)
+                    activeTabId = "1"
+                    browserRepository.saveTab(initialTab)
+                } else {
+                    tabs = savedTabs
+                    settingsRepository.activeTabId.collect { savedActiveId ->
+                        activeTabId = savedActiveId ?: savedTabs.first().id
+                        isInitialized = true
+                    }
+                }
+                isInitialized = true
+            } else {
+                // Keep UI tabs synced with DB updates if necessary, 
+                // but be careful not to overwrite local UI state during navigation
+                // tabs = savedTabs 
+            }
+        }
+    }
+
+    // Save active tab ID when it changes
+    LaunchedEffect(activeTabId) {
+        if (activeTabId.isNotEmpty()) {
+            settingsRepository.setActiveTabId(activeTabId)
+        }
+    }
 
     // UI state for overlays
     var showTabSwitcher by remember { mutableStateOf(false) }
@@ -61,12 +89,14 @@ fun BrowserScreen(
 
     // active tab is initialized so its WebView is composed
     LaunchedEffect(activeTabId) {
-        initializedTabs.add(activeTabId)
+        if (activeTabId.isNotEmpty()) {
+            initializedTabs.add(activeTabId)
+        }
     }
 
     // Reference to the active tab metadata
     val activeTab = remember(tabs, activeTabId) {
-        tabs.find { it.id == activeTabId } ?: tabs.first()
+        tabs.find { it.id == activeTabId } ?: tabs.firstOrNull() ?: BrowserTab(id = "1", url = "https://www.google.com")
     }
     
     // Navigator for the currently active tab (used for TopBar/BottomBar actions)
@@ -99,14 +129,23 @@ fun BrowserScreen(
             state.content = WebContent.Url(finalUrl)
         }
         webViewNavigators[tabId]?.loadUrl(finalUrl)
+
+        // 3. Save to DB
+        scope.launch {
+            tabs.find { it.id == tabId }?.let { browserRepository.saveTab(it) }
+        }
     }
 
     fun addNewTab() {
         val newId = ((tabs.maxOfOrNull { try { it.id.toInt() } catch(e: Exception) { 0 } } ?: 0) + 1).toString()
-        tabs = tabs + BrowserTab(id = newId, url = "https://www.google.com")
+        val newTab = BrowserTab(id = newId, url = "https://www.google.com")
+        tabs = tabs + newTab
         activeTabId = newId
         showTabSwitcher = false
-        scope.launch { drawerState.close() }
+        scope.launch { 
+            drawerState.close()
+            browserRepository.saveTab(newTab)
+        }
     }
 
     fun closeTab(id: String) {
@@ -120,6 +159,9 @@ fun BrowserScreen(
             webViewStates.remove(id)
             webViewNavigators.remove(id)
             initializedTabs.remove(id)
+            scope.launch {
+                browserRepository.deleteTab(id)
+            }
         }
     }
 
@@ -134,6 +176,13 @@ fun BrowserScreen(
     }
 
     val isAnyOverlayOpen = showTabSwitcher || showBookmarks || showHistory || showSettings || drawerState.isOpen
+
+    if (!isInitialized) {
+        Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        return@BrowserScreen
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -274,12 +323,21 @@ fun BrowserScreen(
                                                 t.url
                                             }
 
-                                            t.copy(
+                                            val updatedTab = t.copy(
                                                 url = finalUrl,
                                                 title = state.pageTitle ?: t.title,
                                                 isLoading = !isFinished,
                                                 progress = (loadingStatus as? LoadingState.Loading)?.progress ?: 0f
                                             )
+                                            
+                                            // Save updated tab info to DB when loading finishes
+                                            if (isFinished && (updatedTab.url != t.url || updatedTab.title != t.title)) {
+                                                scope.launch {
+                                                    browserRepository.saveTab(updatedTab)
+                                                }
+                                            }
+                                            
+                                            updatedTab
                                         } else t
                                     }
                                 }
