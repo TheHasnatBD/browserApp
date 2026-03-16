@@ -1,6 +1,7 @@
 package bd.com.infobox.browser
 
 import android.app.Application
+import bd.com.infobox.browser.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 

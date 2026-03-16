@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import bd.com.infobox.browser.repository.AppLanguage
 import bd.com.infobox.browser.repository.AppTheme
-import bd.com.infobox.browser.repository.ThemeSettings
+import bd.com.infobox.browser.repository.SettingsRepository
 import bd.com.infobox.browser.utils.LocalizationManager
 import org.jetbrains.compose.resources.*
 import org.koin.compose.koinInject
@@ -29,12 +29,12 @@ private val LightColorScheme = lightColorScheme(
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun BrowserTheme(
-    themeSettings: ThemeSettings = koinInject(),
+    settingsRepository: SettingsRepository = koinInject(),
     localizationManager: LocalizationManager = koinInject(),
     content: @Composable () -> Unit
 ) {
-    val selectedTheme by themeSettings.selectedTheme.collectAsState(AppTheme.SYSTEM)
-    val selectedLanguage by themeSettings.selectedLanguage.collectAsState(AppLanguage.ENGLISH)
+    val selectedTheme by settingsRepository.selectedTheme.collectAsState(AppTheme.SYSTEM)
+    val selectedLanguage by settingsRepository.selectedLanguage.collectAsState(AppLanguage.ENGLISH)
     val systemInDarkTheme = isSystemInDarkTheme()
     
     // Sync platform locale with saved language on startup and change

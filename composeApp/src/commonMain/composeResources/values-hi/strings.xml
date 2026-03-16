@@ -6,7 +6,7 @@
     <string name="home">होम</string>
     <string name="back">पीछे</string>
     <string name="forward">आगे</string>
-    <string name="bookmarks">बुकमार्क</string>
+    <string name="bookmarks">बुकমार्क</string>
     <string name="history">इतिहास</string>
     <string name="settings">सेटिंग्स</string>
     <string name="browser_menu">ब्राउज़र मेनू</string>
@@ -20,4 +20,5 @@
     <string name="tabs">टैब</string>
     <string name="close">बंद करें</string>
     <string name="close_tab">टैब बंद करें</string>
+    <string name="language">भाषा</string>
 </resources>

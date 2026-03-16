@@ -18,4 +18,7 @@
     <string name="system">Système</string>
     <string name="clear">Effacer</string>
     <string name="tabs">Onglets</string>
+    <string name="close">Fermer</string>
+    <string name="close_tab">Fermer l'onglet</string>
+    <string name="language">Langue</string>
 </resources>

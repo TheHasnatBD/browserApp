@@ -67,10 +67,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(compose.materialIconsExtended)
-            implementation("org.jetbrains.compose.material3:material3:1.10.0-alpha05")
-
-            // use api since the desktop app need to access the Cef to initialize it.
-            api("io.github.kevinnzou:compose-webview-multiplatform:2.0.3")
 
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
@@ -92,7 +88,10 @@ kotlin {
 
             // DataStore
             implementation(libs.androidx.datastore.preferences.core)
-            implementation(libs.okio)
+            //implementation(libs.okio)
+
+            // use api since the desktop app need to access the Cef to initialize it.
+            api("io.github.kevinnzou:compose-webview-multiplatform:2.0.3")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -118,7 +117,7 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.3.2"
     }
     packaging {
         resources {
@@ -134,34 +133,27 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
-
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
 }
 
 compose.desktop {
     application {
         mainClass = "bd.com.infobox.browser.MainKt"
 
-/*        jvmArgs(
-            "--add-opens", "java.desktop/sun.awt=ALL-UNNAMED",
-            "--add-opens", "java.desktop/java.awt.peer=ALL-UNNAMED",
-            "--add-opens", "java.desktop/sun.java2d=ALL-UNNAMED",
-            "--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
-            "--add-opens", "java.desktop/sun.font=ALL-UNNAMED",
-            "--add-opens", "java.base/java.lang=ALL-UNNAMED",
-            "--add-opens", "java.base/java.util=ALL-UNNAMED",
-            "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED",
-            "-Djava.library.path=.",
-            "-Dcef.nosandbox=true"
-        )*/
-
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "bd.com.infobox.browser"
-            packageVersion = "1.0.0"
+            packageVersion = "1.0.3"
         }
     }
 }

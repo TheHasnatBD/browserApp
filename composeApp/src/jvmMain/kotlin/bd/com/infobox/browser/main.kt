@@ -4,8 +4,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import bd.com.infobox.browser.di.initKoin
 import bd.com.infobox.browser.ui.theme.BrowserTheme
-import bd.com.infobox.browser.views.BrowserScreen
+import bd.com.infobox.browser.ui.screens.BrowserScreen
 import com.multiplatform.webview.util.addTempDirectoryRemovalHook
 import dev.datlag.kcef.KCEF
 import kotlinx.coroutines.Dispatchers

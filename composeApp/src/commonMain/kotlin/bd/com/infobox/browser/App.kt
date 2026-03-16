@@ -6,7 +6,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import bd.com.infobox.browser.ui.theme.BrowserTheme
-import bd.com.infobox.browser.views.BrowserScreen
+import bd.com.infobox.browser.ui.screens.BrowserScreen
 
 @Composable
 fun App() {

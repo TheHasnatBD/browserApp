@@ -79,7 +79,7 @@ Run the following Gradle task:
 
 ---
 
-**Note:** This is a learning project. You can find the older version of this project at [TheHasnatBD/browserApp](https://github.com/TheHasnatBD/browserApp). The legacy Android-only project has been moved to the `legacy-android` branch.
+**Note:** This is a learning project. You can find the older version of this project at [TheHasnatBD/browserApp](https://github.com/TheHasnatBD/browserApp/tree/legacy-android). The legacy Android-only project has been moved to the `legacy-android` branch.
 
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

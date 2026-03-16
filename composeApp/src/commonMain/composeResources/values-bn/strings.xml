@@ -18,4 +18,7 @@
     <string name="system">সিস্টেম</string>
     <string name="clear">মুছুন</string>
     <string name="tabs">ট্যাব</string>
+    <string name="close">বন্ধ করুন</string>
+    <string name="close_tab">ট্যাব বন্ধ করুন</string>
+    <string name="language">ভাষা</string>
 </resources>
